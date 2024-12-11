@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        /* Basic Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f9;
+            padding: 20px;
+            color: #333;
+        }
+
+        .dashboard {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #007bff;
+            text-align: center;
+        }
+
+        .section {
+            margin-top: 20px;
+        }
+
+        .provider-card, .user-card {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <h1>Admin Dashboard</h1>
+        
+        <div class="section">
+            <h2>Service Providers</h2>
+            <div id="serviceProviders"></div>
+        </div>
+
+        <div class="section">
+            <h2>Registered Users</h2>
+            <div id="users"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Load data from localStorage
+        function loadServiceProviders() {
+            return JSON.parse(localStorage.getItem('serviceProviders')) || [];
+        }
+
+        function loadUsers() {
+            return JSON.parse(localStorage.getItem('users')) || [];
+        }
+
+        const serviceProvidersContainer = document.getElementById('serviceProviders');
+        const usersContainer = document.getElementById('users');
+
+        // Display service providers
+        function displayServiceProviders() {
+            const providers = loadServiceProviders();
+            serviceProvidersContainer.innerHTML = '';
+
+            providers.forEach(provider => {
+                const providerDiv = document.createElement('div');
+                providerDiv.className = 'provider-card';
+                providerDiv.innerHTML = 
+                    `<p><strong>Name:</strong> ${provider.name}</p>
+                    <p><strong>Contact:</strong> ${provider.contact}</p>
+                    <p><strong>Email:</strong> ${provider.email}</p>
+                    <p><strong>Occupation:</strong> ${provider.occupation}</p>
+                    <button onclick="deleteProvider('${provider.email}')">Delete</button>
+                    <button onclick="editProvider('${provider.email}')">Edit</button>`;
+                serviceProvidersContainer.appendChild(providerDiv);
+            });
+        }
+
+        // Display users
+        function displayUsers() {
+            const users = loadUsers();
+            usersContainer.innerHTML = '';
+
+            users.forEach(user => {
+                const userDiv = document.createElement('div');
+                userDiv.className = 'user-card';
+                userDiv.innerHTML = 
+                    `<p><strong>Name:</strong> ${user.name}</p>
+                    <p><strong>Email:</strong> ${user.email}</p>
+                    <button onclick="deleteUser('${user.email}')">Delete</button>`;
+                usersContainer.appendChild(userDiv);
+            });
+        }
+
+        // Delete service provider
+        function deleteProvider(email) {
+            let providers = loadServiceProviders();
+            providers = providers.filter(provider => provider.email !== email);
+            localStorage.setItem('serviceProviders', JSON.stringify(providers));
+            displayServiceProviders();
+        }
+
+        // Edit service provider (for this example, just reload form with details)
+        function editProvider(email) {
+            const providers = loadServiceProviders();
+            const provider = providers.find(p => p.email === email);
+
+            if (provider) {
+                const name = prompt('Edit Name:', provider.name);
+                const contact = prompt('Edit Contact:', provider.contact);
+                const occupation = prompt('Edit Occupation:', provider.occupation);
+
+                provider.name = name;
+                provider.contact = contact;
+                provider.occupation = occupation;
+
+                localStorage.setItem('serviceProviders', JSON.stringify(providers));
+                displayServiceProviders();
+            }
+        }
+
+        // Delete user
+        function deleteUser(email) {
+            let users = loadUsers();
+            users = users.filter(user => user.email !== email);
+            localStorage.setItem('users', JSON.stringify(users));
+            displayUsers();
+        }
+
+        // Initial data loading
+        displayServiceProviders();
+        displayUsers();
+    </script>
+</body>
+</html>

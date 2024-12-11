@@ -1,0 +1,150 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Body Styling */
+body {
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Dashboard Container */
+.dashboard {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Headings */
+.dashboard h1 {
+    text-align: center;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.dashboard h2 {
+    color: #333;
+    margin: 20px 0 10px;
+}
+
+/* Form Styling */
+form {
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+form input,
+form select,
+form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+form input[type="file"] {
+    padding: 5px;
+}
+
+form button {
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+/* Provider Cards */
+.provider-card {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.provider-card p {
+    margin-bottom: 8px;
+}
+
+.provider-card button {
+    padding: 8px 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.provider-card button:hover {
+    background-color: #0056b3;
+}
+
+.provider-card button:nth-child(2) {
+    background-color: #dc3545;
+}
+
+.provider-card button:nth-child(2):hover {
+    background-color: #a71d2a;
+}
+
+/* Search Box */
+#search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Call and Message Buttons */
+.provider-card button:nth-child(3),
+.provider-card button:nth-child(4) {
+    background-color: #28a745;
+}
+
+.provider-card button:nth-child(3):hover,
+.provider-card button:nth-child(4):hover {
+    background-color: #218838;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .dashboard {
+        padding: 15px;
+    }
+
+    form input,
+    form select,
+    form button {
+        font-size: 14px;
+    }
+
+    .provider-card p {
+        font-size: 14px;
+    }
+}
